@@ -13,6 +13,7 @@ class Clustering:
     def DBSCAN_clustering(X, eps=0.5, minpts=5):
         scaler = StandardScaler(with_mean=False)
         X_scaled = scaler.fit_transform(X)
+        print(X_scaled)
 
         dbscan = DBSCAN(eps=eps, min_samples=minpts)
         dbscan_labels = dbscan.fit_predict(X_scaled)
