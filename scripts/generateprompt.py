@@ -8,6 +8,8 @@ def generate_prompt_merge_entities():
     for entities in df['entity']:
         all_entities.extend(entities.split(', '))
     # print(all_entities)
+    all_entities = np.array(all_entities)
+    np.savetxt(X=all_entities, fname='../data/entities_60.txt', fmt="%s, ")
 
     prompt = f"""
         You are provided with a list of entity names and tasked with identifying and removing synonyms 
