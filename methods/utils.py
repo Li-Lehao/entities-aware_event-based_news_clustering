@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import json
 
 class Input:
     @staticmethod
@@ -10,6 +11,26 @@ class Input:
             df = pd.read_csv(path)
         return df
     
+    @staticmethod
+    def read_entity_set_csv(path):
+        with open(path, 'r') as file:
+            content = file.read()
+        entities = [entity.strip() for entity in content.split(',')]
+        return np.array(entities)
+    
+    @staticmethod
+    def read_entity_set_json(path):
+        with open(path, 'r') as file:
+            data = json.load(file)
+        entity_set = data['entities']
+        return entity_set
+    
+    @staticmethod
+    def read_entity_mapping_json(path):
+        with open(path, 'r') as file:
+            data = json.load(file)
+        entity_mapping = data['mapping']
+        return entity_mapping
 
 class Utils:
     @staticmethod
