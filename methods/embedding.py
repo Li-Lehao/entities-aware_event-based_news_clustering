@@ -37,14 +37,20 @@ class Embedding:
 
     @staticmethod
     def entities_based_embedding(X, entity_set, entity_mapping):
+        # print(f'entitiy_mapping = {entity_mapping}')
         # map synonyms to the representative one
         X_mapped = []
         for sample in X:
             sample_mapped = []
+            # print(f'sample = {sample}')
+            sample = sample.strip().split(',')
             for entity in sample:
+                entity = entity.strip()
+                # print(f'entity = {entity}')
                 if entity in entity_mapping:
                     sample_mapped.append(entity_mapping[entity])
             X_mapped.append(sample_mapped)
+        # X_mapped = X
 
         # one-hot encode each sample based on the overall entity set
         m = len(entity_set)
@@ -58,7 +64,7 @@ class Embedding:
                 if entity in entity_to_index:
                     sample_onehot[entity_to_index[entity]] = 1
             X_onehot.append(sample_onehot)
-        return np.array(X_onehot)
+        return np.array(X_onehot), X_mapped
     
     @staticmethod
     def binary_sparse_embedding_single_col(X, num_bits):
@@ -89,6 +95,6 @@ class Embedding:
             if i == 0:
                 X_embedded = column_embedded
             else:
-                np.concatenate((X_embedded, column_embedded), axis=1)
+                X_embedded = np.concatenate((X_embedded, column_embedded), axis=1)
         return X_embedded
     

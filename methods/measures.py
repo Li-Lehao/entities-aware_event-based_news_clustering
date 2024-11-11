@@ -14,9 +14,10 @@ class Measures:
         filtered_y = []
         filtered_y_pred = []
         for i in range(len(y)):
-            if y[i] != -1 and y_pred[i] != -1:
-                filtered_y.append[y[i]]
-                filtered_y_pred.append[y_pred[i]]
+            # if y[i] != -1 and y_pred[i] != -1:
+            if y[i] != -1:
+                filtered_y.append(y[i])
+                filtered_y_pred.append(y_pred[i])
         return np.array(filtered_y), np.array(filtered_y_pred)
     
     @staticmethod
